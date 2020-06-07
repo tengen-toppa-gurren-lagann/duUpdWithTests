@@ -1,0 +1,24 @@
+package du;
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
+import java.io.File
+//import du.DuLauncher as DuLauncher
+
+class Tests {
+
+    private fun assertFileContent(name: String, expectedContent: String) {
+        val file = File(name)
+        val strList = file.readLines()
+        val content = strList.joinToString("\n")
+        assertEquals(expectedContent, content)
+    }
+
+    @Test
+    fun main() {
+        val cmdLine = arrayOf("-c", "-h", "c:\\0\\kb\\1") // В конфигурации запуска класса DuLauncher консольный вывод назначен на вывод в файл c:\test.out
+        val dul = DuLauncher().main(cmdLine)
+        assertFileContent("c:\\test.txt", "Files summary size = 151 KB\n");
+    }
+}

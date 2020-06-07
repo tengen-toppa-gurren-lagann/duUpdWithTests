@@ -1,0 +1,27 @@
+package du;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class DuLauncherTest {
+    private void assertFileContent(String fileName, String expectedContent) throws IOException {
+        String content = "";
+        content = new String(Files.readAllBytes(Paths.get(fileName)));
+        assertEquals(expectedContent, content);
+    }
+    @Test
+    void main() {
+        String[] cmdLine = {"-c", "-h", "c:\\0\\kb\\1"}; // В конфигурации запуска класса DuLauncher консольный вывод назначен на вывод в файл c:\test.out
+        new DuLauncher().main(cmdLine);
+        try {
+            assertFileContent("c:\\test.out", "Files summary size = 151 KB    \n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
