@@ -8,26 +8,27 @@ import java.util.List;
 
 public class DuLauncher {
 
-    @Option(name = "-h", required=false, usage = "readable format")
+    @Option(name = "-h", usage = "readable format") // required=false
     private boolean readable = false;
 
-    @Option(name = "-c", required=false, usage = "summed size")
+    @Option(name = "-c", usage = "summed size") // required=false
     private boolean summed = false;
 
-    @Option(name = "--si", required=false, usage = "all units size comes in 1000 format instead of 1024")
+    @Option(name = "--si", usage = "all units size comes in 1000 format instead of 1024") // required=false
     private boolean si = false;
 
     @Argument
     private List<String> filesList = new ArrayList<>();
 
-    public static int result = 0; // 0 - успех, 1 - ошибка
+    int result = 0; // 0 - успех, 1 - ошибка
 
     public static void main(String[] args) {
-        new DuLauncher().launch(args);
-        System.exit(DuLauncher.result);
+        DuLauncher duLauncher = new DuLauncher();
+        duLauncher.launch(args);
+        System.exit(duLauncher.result);
     }
 
-    public void launch(String[] args) {
+    void launch(String[] args) {
         CmdLineParser parser = new CmdLineParser(this);
         try {
             parser.parseArgument(args);

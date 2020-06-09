@@ -8,7 +8,7 @@ class DuLauncherTest {
 
     @Test
     void launch1() {
-        String[] cmdLine = {"-c", "-h", "c:\\nosuchfile.txt"}; // Такого файла нет -> проверяем, что result=1
+        String[] cmdLine = {"-c", "-h", "input/nosuchfile.txt"}; // Такого файла нет -> проверяем, что result=1
         DuLauncher launcher = new DuLauncher();
         launcher.launch(cmdLine);
         assertEquals(1, launcher.result);
@@ -16,7 +16,7 @@ class DuLauncherTest {
 
     @Test
     void launch2() {
-        String[] cmdLine = {"-c", "-h", "c:\\Test\\test.txt"}; // Такой файл есть -> проверяем, что result=0
+        String[] cmdLine = {"-c", "-h", "input/Test/test.bin"}; // Такой файл есть -> проверяем, что result=0
         DuLauncher launcher = new DuLauncher();
         launcher.launch(cmdLine);
         assertEquals(0, launcher.result);

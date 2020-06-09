@@ -1,4 +1,4 @@
-package du;
+package du
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -8,10 +8,10 @@ internal class DiskUsageTest {
     @Test
     fun getFileOrFolderSize() {
         val files = listOf<String>()
-        var file = File("C:\\Test\\test.txt") // Файл известного размера: 714503 байт
+        var file = File("input/Test/test.bin") // Файл известного размера: 714503 байт
         var size = DiskUsage(files).getFileOrFolderSize(file)
         assertEquals(714503, size)
-        file = File("C:\\Test") // Папка известного размера с вложенными папками: 13575265 байт
+        file = File("input/Test") // Папка известного размера с вложенными папками: 13575265 байт
         size = DiskUsage(files).getFileOrFolderSize(file)
         assertEquals(13575265, size)
     }
@@ -63,11 +63,11 @@ internal class DiskUsageTest {
     @Test
     fun calcSizeAndWriteResult() {
         val files1 = listOf<String>()
-        var result = DiskUsage(files1).calcSizeAndWriteResult(false,false,false) // Список файлов пуст -> ошибка
+        var result = DiskUsage(files1).calcSizeAndWriteResult(readable = false, summed = false, si = false) // Список файлов пуст -> ошибка
         assertEquals(1, result)
 
-        val files2 = listOf<String>("c:\\test") // Существующая папка -> успех
-        result = DiskUsage(files2).calcSizeAndWriteResult(false,false,false) // Список файлов пуст -> ошибка
+        val files2 = listOf("input/Test") // Существующая папка -> успех
+        result = DiskUsage(files2).calcSizeAndWriteResult(readable = false, summed = false, si = false) // Список файлов пуст -> ошибка
         assertEquals(0, result)
     }
 
