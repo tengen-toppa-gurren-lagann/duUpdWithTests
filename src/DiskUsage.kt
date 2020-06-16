@@ -9,11 +9,15 @@ class DiskUsage(files: List<String>) {
 
   fun getFileOrFolderSize(dir: File): Long {
     var size: Long = 0
-    if (!dir.isFile) {
-        for (file in dir.listFiles()!!) {
-            size += if (file.isFile) {
-                file.length()
-            } else getFileOrFolderSize(file)
+    if (dir.isDirectory) {
+        try { // В случае если каталог будет недоступен, поймаем исключение и продолжим
+            for (file in dir.listFiles()!!) {
+                size += if (file.isFile) {
+                    file.length()
+                } else getFileOrFolderSize(file)
+            }
+        }
+        catch (e: NullPointerException) {
         }
     } else size += dir.length()
     return size
